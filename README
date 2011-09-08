@@ -4,7 +4,7 @@ These are all scripts to provide various notifications from concerning tasks in 
 Configuration of the email address and file locations can be changed in the 'config' file in the root of the repo. A sample config is provided in example.config. Simply rename this to config and make the appropriate edits.
 
 *** Available Scripts ***
-task-email.sh: Uses ssmtp to send html formatted email to you on a regular basis giving you updates on your task list. I'm playing with two methods of accomplishing this. This one requires python and numpy (a python module). See the task-ansi2email.sh for an option that does not require python. Currently, the fancy HTML on this is optimized for mobile screens so it's thin and all that. I assume a little CSS would change this quickly. Thanks to 
+task-email.sh: Uses ssmtp to send html formatted email to you on a regular basis giving you updates on your task list. I'm playing with two methods of accomplishing this. This one requires python and numpy (a python module). See the task-ansi2email.sh for an option that does not require python. Currently, the fancy HTML on this is optimized for mobile screens so it's thin and all that. I assume a little CSS would change this quickly. Thanks to Mail Chimp for releasing some good HTML templates on github.
 
 task-popup.sh: Provides popups with sound to your linux desktop. This uses tools that come as part of the default ubuntu system, but are available on other Linux operating systems.
 
