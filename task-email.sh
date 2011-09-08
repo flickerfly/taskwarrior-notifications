@@ -4,13 +4,8 @@
 # Requires ssmtp
 # cron: 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
 
-# Directory to find support files
-inc="/home/jritchie/scripts/taskwarrior-notifications"
-tmp_email="/tmp/task_email.txt"
-templates="$inc/templates"
-scripts="$inc/scripts"
-# Whom to email this too
-sendto="josiah@fim.org"
+# Pull in the config variables
+source ./config
 
 # Format time string
 date=`date '+%b %d'` #Sept 07
