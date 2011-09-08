@@ -22,7 +22,7 @@ Content-Disposition: inline
 EOF
 
 #pump the task information into the email
-task status:completed | $scripts/ansi2html.sh >> $tmp_email
+task | $scripts/ansi2html.sh >> $tmp_email
 
 # Send the email
 ssmtp $sendto < $tmp_email
