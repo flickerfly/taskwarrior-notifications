@@ -5,7 +5,12 @@
 # cron: 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
 
 # Pull in the config variables
-source ./config
+f [ -f ./config ]; then
+  source ./config
+elif
+  echo "No configuration file found. Maybe you need to copy and edit the example.config file to config."
+  exit 1
+fi
 
 # Format time string
 date=`date '+%b %d'` #Sept 07

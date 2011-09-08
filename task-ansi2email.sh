@@ -8,7 +8,13 @@
 # cron: 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
 
 # Pull in the config variables
-source ./config
+if [ -f ./config ]
+then
+  source ./config
+else
+  echo "No configuration file found. Maybe you need to copy and edit the example.config file to config."
+  exit 1
+fi
 
 #setup headers so the HTML shows properly
 cat > $tmp_email <<EOF
