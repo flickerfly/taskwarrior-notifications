@@ -1,3 +1,12 @@
-task-email.sh: Uses ssmtp to send html formatted email to you on a regular basis giving you updates on your task list. I'm playing with two methods of accomplishing this.
+These are all scripts to provide various notifications from concerning tasks in taskwarrior, a commandline task management system.
+
+task-email.sh: Uses ssmtp to send html formatted email to you on a regular basis giving you updates on your task list. I'm playing with two methods of accomplishing this. This one requires python and numpy (a python module). See the task-ansi2email.sh for an option that does not require python. Currently, the fancy HTML on this is optimized for mobile screens so it's thin and all that. I assume a little CSS would change this quickly. Thanks to 
 
 task-popup.sh: Provides popups with sound to your linux desktop. This uses tools that come as part of the default ubuntu system, but are available on other Linux operating systems.
+
+task-ansi2email.sh: An alternate, but not as pretty version of HTML email. This puts the task output into an HTML pre tag so it appears as it would on the command line. I kinda like that though.
+
+crontab lines:
+*/30 * * * * DISPLAY=:0.0 /home/user/bin/taskwarrior-notifications/task-popup.sh
+*/30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
+
