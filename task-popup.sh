@@ -1,4 +1,5 @@
 #!/bin/bash
+# found this code on http://taskwarrior.org/projects/1/wiki/Export-htmlpy
 # For cron: */30 * * * * DISPLAY=:0.0 /home/User/configs/TaskNotify.sh
 # Requires linux with notify-send and canberra-gtk-play which are default on Ubuntu
 

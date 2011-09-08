@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# found this code on http://taskwarrior.org/projects/1/wiki/Export-htmlpy
 # sudo apt-get install python-numpy
 # requires taskwarrior 1.9.4 and python-numpy
 
