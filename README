@@ -6,9 +6,12 @@ task-popup.sh: Provides popups with sound to your linux desktop. This uses tools
 
 task-ansi2email.sh: An alternate, but not as pretty version of HTML email. This puts the task output into an HTML pre tag so it appears as it would on the command line. I kinda like that though.
 
+task-print.sh: Yeah, this doesn't actually exist because it is easily done in a crontab line so a script is overkill in a basic situation. See the appropriate line below.
+
 crontab lines:
 # Popup a little notice monday through friday ever 30 minutes with task info
 */30 * * * 1-5 DISPLAY=:0.0 /home/user/bin/taskwarrior-notifications/task-popup.sh
 # Send me an email every morning at 5:30 on all days except Sunday.
 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
-
+# Print out my task list every weekday morning at 5:30
+30 5 * * 1-5 /usr/bin/task | /usr/bin/lp
