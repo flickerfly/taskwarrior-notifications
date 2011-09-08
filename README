@@ -1,0 +1,3 @@
+task-email.sh: Uses ssmtp to send html formatted email to you on a regular basis giving you updates on your task list. I'm playing with two methods of accomplishing this.
+
+task-popup.sh: Provides popups with sound to your linux desktop. This uses tools that come as part of the default ubuntu system, but are available on other Linux operating systems.
