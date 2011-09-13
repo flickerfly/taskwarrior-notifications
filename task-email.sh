@@ -5,9 +5,11 @@
 # cron: 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
 
 # Pull in the config variables
-f [ -f ./config ]; then
-  source ./config
-elif
+dir="$( cd "$( dirname "$0" )" && pwd )"
+ 
+if [ -f $dir/config ]; then
+  source $dir/config
+else
   echo "No configuration file found. Maybe you need to copy and edit the example.config file to config."
   exit 1
 fi
@@ -31,5 +33,5 @@ echo `task _query status:completed | $scripts/export-html.py` >> $tmp_email
 cat $templates/html_email_foot.template >> $tmp_email
 
 # Send the email
-ssmtp $sendto < $tmp_email
+$mail_prog $sendto < $tmp_email
 rm $tmp_email

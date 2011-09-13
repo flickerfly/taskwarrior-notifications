@@ -8,9 +8,11 @@
 # cron: 30 5 * * 1-6 /home/user/bin/taskwarrior-notifications/task-email.sh
 
 # Pull in the config variables
-if [ -f ./config ]
+dir="$( cd "$( dirname "$0" )" && pwd )"
+
+if [ -f $dir/config ]
 then
-  source ./config
+  source $dir/config
 else
   echo "No configuration file found. Maybe you need to copy and edit the example.config file to config."
   exit 1
@@ -30,5 +32,5 @@ EOF
 task | $scripts/ansi2html.sh >> $tmp_email
 
 # Send the email
-ssmtp $sendto < $tmp_email
+$mail_prog $sendto < $tmp_email
 rm $tmp_email
