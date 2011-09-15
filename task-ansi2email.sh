@@ -29,7 +29,7 @@ Content-Disposition: inline
 EOF
 
 #pump the task information into the email
-task | $scripts/ansi2html.sh >> $tmp_email
+task $report | $scripts/ansi2html.sh >> $tmp_email
 
 # Send the email
 $mail_prog $sendto < $tmp_email
