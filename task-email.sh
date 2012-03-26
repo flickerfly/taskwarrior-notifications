@@ -29,7 +29,12 @@ EOF
 # Get the template loaded up
 cat $templates/html_email_head.template >> $tmp_email
 echo "<h1>Task Info: $date</h1>" >> $tmp_email
-echo `task _query status:completed | $scripts/export-html.py` >> $tmp_email
+echo "<h2>Overdue</h2>" >> $tmp_email
+echo `task due.before:today export | $scripts/export-html.py` >> $tmp_email
+echo "<h2>Today</h2>" >> $tmp_email
+echo `task due:today export | $scripts/export-html.py` >> $tmp_email
+echo "<h2>This Week</h2>" >> $tmp_email
+echo `task due.after:today and due.before:eom export | $scripts/export-html.py` >> $tmp_email
 cat $templates/html_email_foot.template >> $tmp_email
 
 # Send the email
