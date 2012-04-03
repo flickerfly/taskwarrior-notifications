@@ -22,6 +22,8 @@ def main():
             # pack columns into array
             lin = eval(line)
             tasks = append(tasks, lin)
+        else:
+            print("%s" % line) # print "No matches."
 
     print("  <ol>")
     print_html_descriptions(tasks)
