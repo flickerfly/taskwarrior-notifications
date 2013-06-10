@@ -15,7 +15,7 @@ else
 fi
 
 # Format time string
-date=`date '+%b %d'` #Sept 07
+date=`date '+%d/%m/%Y'` #07/09/2012
 
 cat > $tmp_email <<EOF
 From: The Task List <$sendto> 
@@ -26,10 +26,43 @@ Content-Type: text/html
 Content-Disposition: inline
 EOF
 
+# Define my own eow and eonw
+eow=`date -d "sunday" +%d/%m/%Y` # end of week
+eonw=`date -d "1 week sunday" +%d/%m/%Y` # end of next week
+
 # Get the template loaded up
 cat $templates/html_email_head.template >> $tmp_email
 echo "<h1>Task Info: $date</h1>" >> $tmp_email
-echo `task _query status:completed | $scripts/export-html.py` >> $tmp_email
+
+# Overdue
+echo "<h2>Overdue</h2>" >> $tmp_email
+echo `task "due.before:today and status:pending" export | $scripts/export-html.py` >> $tmp_email
+
+if [[ $(date +%u) -lt 6 ]] ; then # Weekday
+
+# Today
+echo "<h2>Today</h2>" >> $tmp_email
+echo `task "due:today and status:pending" export | $scripts/export-html.py` >> $tmp_email
+# This Week (but not today)
+echo "<h2>This Week</h2>" >> $tmp_email
+echo `task "due.after:today and (due.before:$eow or due:$eow) and status:pending" export | $scripts/export-html.py` >> $tmp_email
+
+else
+
+# This Weekend
+echo "<h2>This Weekend</h2>" >> $tmp_email
+if [[ $(date +%u) -eq 6 ]] ; then # Saturday 
+  echo `task "(due:today or due:tomorrow) and status:pending" export | $scripts/export-html.py` >> $tmp_email
+else # Sunday
+  echo `task "(due:yesterday or due:today) and status:pending" export | $scripts/export-html.py` >> $tmp_email
+fi
+
+fi
+
+# Next Week
+echo "<h2>Next Week</h2>" >> $tmp_email
+echo `task "due.after:$eow and (due.before:$eonw or due:$eonw) and status:pending" export | $scripts/export-html.py` >> $tmp_email
+
 cat $templates/html_email_foot.template >> $tmp_email
 
 # Send the email
