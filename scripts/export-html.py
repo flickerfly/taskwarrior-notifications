@@ -12,14 +12,18 @@ def print_html_descriptions(tasks):
             if 'tags' not in t:
                 print("    <li>%s</li>" % t['description'])
             else:
-                print("    <li>%s (%s)</li>" % (t['description'], t['tags']))
+                tags = ', '.join(t['tags']) # join tags as comma separated list
+                print("    <li>%s (%s)</li>" % (t['description'], tags))
 
 def main():
     tasks = array([])
     for line in sys.stdin: # reads in all lines until EOF
-        # pack columns into array
-        lin = eval(line)
-        tasks = append(tasks, lin)
+        if 'No matches.' not in line:
+            # pack columns into array
+            lin = eval(line)
+            tasks = append(tasks, lin)
+        else:
+            print("%s" % line) # print "No matches."
 
     print("  <ol>")
     print_html_descriptions(tasks)
