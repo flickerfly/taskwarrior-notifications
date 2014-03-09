@@ -27,8 +27,13 @@ Content-Disposition: inline
 EOF
 
 # Define my own eow and eonw
-eow=`date -d "sunday" +%d/%m/%Y` # end of week
-eonw=`date -d "1 week sunday" +%d/%m/%Y` # end of next week
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    eow=`date -v+1w -vsun +%d%m%Y` # end of week
+    eonw=`date -v+2w -vsun +%d%m%Y` # end of next week
+else
+    eow=`date -d "sunday" +%d/%m/%Y` # end of week
+    eonw=`date -d "1 week sunday" +%d/%m/%Y` # end of next week
+fi
 
 # Get the template loaded up
 cat $templates/html_email_head.template >> $tmp_email
